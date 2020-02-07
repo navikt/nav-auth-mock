@@ -16,4 +16,5 @@ fun Application.NavAuthMock() {
     }
 }
 
+
 internal fun ApplicationRequest.baseUrl() = "${origin.scheme}://${host()}:${port()}"
