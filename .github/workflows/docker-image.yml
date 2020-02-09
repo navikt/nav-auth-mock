@@ -29,15 +29,12 @@ jobs:
         env:
           DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/nav-auth-mock
         run: |
-          echo $DOCKER_IMAGE > .docker_image
-          echo "$(date "+%Y.%m.%d")-$(git rev-parse --short HEAD)" > .docker_tag
+          echo "::set-env name=LATEST::$DOCKER_IMAGE:latest"
       - name: Bygge Docker image
-        run: docker build . --pull -t $(cat .docker_image):$(cat .docker_tag)
+        run: docker build . --pull --tag $LATEST
       - name: Laste opp Docker image
         run: |
           echo "$GITHUB_TOKEN" | docker login --username "x-access-token" --password-stdin https://docker.pkg.github.com
-          docker push $(cat .docker_image):$(cat .docker_tag)
-          docker tag $(cat .docker_image):$(cat .docker_tag) $(cat .docker_image):latest
-          docker push $(cat .docker_image):latest
+          docker push $LATEST
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
