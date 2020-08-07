@@ -10,9 +10,9 @@
 
     <properties>
         <ktor.version>1.3.2</ktor.version>
-        <dusseldorf.sha>10326c6</dusseldorf.sha>
+        <dusseldorf.sha>78b57e1</dusseldorf.sha>
         <dusseldorf.version>${ktor.version}.${dusseldorf.sha}</dusseldorf.version>
-        <kotlin.version>1.3.71</kotlin.version>
+        <kotlin.version>1.3.72</kotlin.version>
     </properties>
 
     <dependencies>
@@ -74,7 +74,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
                 <configuration>
                     <finalName>app</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
