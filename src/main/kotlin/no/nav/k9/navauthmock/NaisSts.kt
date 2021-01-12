@@ -20,10 +20,10 @@ import org.slf4j.LoggerFactory
 private val logger = LoggerFactory.getLogger("no.nav.k9.navauthmock.NavSts")
 
 private object NavStsKonstanter {
-    internal const val basePath = "/nais-sts"
-    internal const val wellKnownPath = "$basePath/.well-known/openid-configuration"
-    internal const val tokenPath = "$basePath/token"
-    internal const val jwksPath = "$basePath/jwks"
+    const val basePath = "/nais-sts"
+    const val wellKnownPath = "$basePath/.well-known/openid-configuration"
+    const val tokenPath = "$basePath/token"
+    const val jwksPath = "$basePath/jwks"
 }
 
 internal fun Routing.naisSts() {

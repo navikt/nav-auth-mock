@@ -24,10 +24,10 @@ private val logger = LoggerFactory.getLogger("no.nav.k9.navauthmock.LoginService
 
 
 private object LoginServiceKonstanter {
-    internal const val basePath = "/login-service/v1.0"
-    internal const val wellKnownPath = "$basePath/.well-known/openid-configuration"
-    internal const val loginPath = "$basePath/login"
-    internal const val jwksPath = "$basePath/jwks"
+    const val basePath = "/login-service/v1.0"
+    const val wellKnownPath = "$basePath/.well-known/openid-configuration"
+    const val loginPath = "$basePath/login"
+    const val jwksPath = "$basePath/jwks"
 }
 
 internal fun Routing.loginService() {
