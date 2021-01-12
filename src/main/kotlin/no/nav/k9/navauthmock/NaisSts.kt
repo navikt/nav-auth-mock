@@ -1,6 +1,6 @@
 package no.nav.k9.navauthmock
 
-import io.ktor.application.call
+import io.ktor.application.*
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -9,8 +9,8 @@ import io.ktor.request.header
 import io.ktor.request.httpMethod
 import io.ktor.request.uri
 import io.ktor.response.respondText
-import io.ktor.routing.Routing
-import io.ktor.routing.get
+import io.ktor.routing.*
+import io.ktor.util.pipeline.*
 import no.nav.helse.dusseldorf.testsupport.http.NaisStsToken
 import no.nav.helse.dusseldorf.testsupport.http.NaisStsTokenRequest
 import no.nav.helse.dusseldorf.testsupport.http.NaisStsWellKnown
@@ -27,7 +27,7 @@ private object NavStsKonstanter {
 }
 
 internal fun Routing.naisSts() {
-    get(NavStsKonstanter.tokenPath) {
+    val tokenBody: suspend PipelineContext<Unit, ApplicationCall>.(Unit) -> Unit = {
         logger.info("${call.request.httpMethod.value}@${call.request.uri}")
         val baseUrl = call.request.baseUrl()
 
@@ -42,6 +42,9 @@ internal fun Routing.naisSts() {
                 text = tokenResponse
         )
     }
+    get(NavStsKonstanter.tokenPath, tokenBody)
+
+    post (NavStsKonstanter.tokenPath, tokenBody)
 
     get(NavStsKonstanter.jwksPath) {
         logger.info("${call.request.httpMethod.value}@${call.request.uri}")
