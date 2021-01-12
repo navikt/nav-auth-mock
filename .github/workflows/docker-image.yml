@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hente kode
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Sette opp Java
         uses: actions/setup-java@v1
         with:
@@ -29,7 +29,7 @@ jobs:
         env:
           DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/nav-auth-mock
         run: |
-          echo "::set-env name=LATEST::$DOCKER_IMAGE:latest"
+          echo "LATEST=$DOCKER_IMAGE:latest" >> $GITHUB_ENV
       - name: Bygge Docker image
         run: docker build . --pull --tag $LATEST
       - name: Laste opp Docker image
